@@ -1,0 +1,22 @@
+# Virtual environment
+.venv/
+
+# Django
+*.pyc
+*.pyo
+__pycache__/
+*.sqlite3
+
+# React frontend
+node_modules/
+build/
+/dist/
+/.idea/
+*.log
+
+# Editor
+.vscode/
+
+# Pytest
+.coverage
+.pytest_cache
