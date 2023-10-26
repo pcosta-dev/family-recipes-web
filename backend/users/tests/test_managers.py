@@ -10,10 +10,13 @@ User = get_user_model()
 @pytest.mark.django_db()
 class TestUserManager:
     def test_create_valid_user(self):
+        name = fake.name()
         email = fake.email()
         password = fake.password()
-        user = User.objects.create_user(email=email, password=password)
+        user = User.objects.create_user(username=name, email=email, 
+                                        password=password)
 
+        assert user.username == name
         assert user.email == email
         assert check_password(password, user.password)
         assert user.is_active
@@ -22,6 +25,7 @@ class TestUserManager:
 
 
     def test_create_user_missing_arguments(self):
+        name = fake.name()
         email = fake.email()
         password = fake.password()
 

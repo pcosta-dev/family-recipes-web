@@ -10,4 +10,4 @@ class TestCustomUserModel:
 @pytest.mark.django_db()
 class TestProfileModel:
     def test_profile_string_representation(self, base_custom_profile):
-        assert str(base_custom_profile) == base_custom_profile.username
+        assert str(base_custom_profile) == base_custom_profile.user.username

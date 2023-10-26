@@ -1,6 +1,6 @@
 import pytest
 from faker import Faker
-from .factories import CustomUserFactory, ProfileFactory
+from .factories import UserFactory, ProfileFactory
 
 
 fake = Faker()
@@ -8,9 +8,9 @@ fake = Faker()
 
 @pytest.fixture()
 def custom_user():
-    return CustomUserFactory(email=fake.email(), password=fake.password())
+    return UserFactory()#username=fake.user_name(), email=fake.email(), password=fake.password())
 
 
 @pytest.fixture()
-def base_custom_profile(custom_user):
-    return ProfileFactory(user=custom_user, username=fake.name())
+def base_custom_profile():
+    return ProfileFactory()

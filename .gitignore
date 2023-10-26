@@ -5,6 +5,7 @@
 *.pyc
 *.pyo
 __pycache__/
+migrations/
 *.sqlite3
 
 # React frontend
