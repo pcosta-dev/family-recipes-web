@@ -10,22 +10,21 @@ User = get_user_model()
 @pytest.mark.django_db()
 class TestUserManager:
     def test_create_valid_user(self):
-        name = fake.name()
+        username = fake.user_name()
         email = fake.email()
         password = fake.password()
-        user = User.objects.create_user(username=name, email=email, 
-                                        password=password)
+        user = User.objects.create_user(
+            username=username, email=email, password=password
+        )
 
-        assert user.username == name
+        assert user.username == username
         assert user.email == email
         assert check_password(password, user.password)
         assert user.is_active
         assert not user.is_superuser
         assert not user.is_staff
 
-
     def test_create_user_missing_arguments(self):
-        name = fake.name()
         email = fake.email()
         password = fake.password()
 
@@ -57,7 +56,6 @@ class TestUserManager:
 
         assert str(ex_info.value) == expected_message
 
-
     def test_create_superuser(self):
         email = fake.email()
         password = fake.password()
@@ -71,14 +69,16 @@ class TestUserManager:
 
         with pytest.raises(ValueError) as ex_info:
             User.objects.create_super_user(
-                email=email, password=password, is_superuser=False)
+                email=email, password=password, is_superuser=False
+            )
 
-        expected_message = 'Superuser must have is_superuser=True' 
+        expected_message = "Superuser must have is_superuser=True"
         assert str(ex_info.value) == expected_message
-        
+
         with pytest.raises(ValueError) as ex_info:
             User.objects.create_super_user(
-                email=email, password=password, is_staff=False)
-        
-        expected_message = 'Superuser must have is_staff=True' 
+                email=email, password=password, is_staff=False
+            )
+
+        expected_message = "Superuser must have is_staff=True"
         assert str(ex_info.value) == expected_message
